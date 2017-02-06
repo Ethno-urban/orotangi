@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+{% load static %}
+{% load staticfiles %}
+{% load i18n %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% trans "Home" %} - Orotangi{% endblock %}</title>
+    <!-- Latest compiled and minified CSS -->
+    <meta name="author" content="FoxMaSk">
+    {% include 'material/includes/material_css.html' %}
+</head>
+<body>
+<div id="app">
+    {% block navbar %}
+    <nav class="cyan darken-1">
+        <div class="nav-wrapper">
+            <a  class="brand-logo" href="{% url 'home' %}" title="{% trans 'Home' %}">Orotangi</a>
+            {% if user.is_authenticated %}
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><li><a href="{% url 'logout' %}" title="{% trans 'Log out' %}">{% trans 'Log out' %}</a></li></li>
+            </ul>
+            {% endif %}
+        </div>
+    </nav>
+    {% endblock navbar %}
+    <!--div class="container"-->
+        <div class="row">
+        {% block content %}
+        {% endblock %}
+        {% if user.is_authenticated is False %}
+            <p>
+                <strong>Orotangi</strong> is up !
+            </p>
+            <p>Have Fun</p>
+            <a class="btn btn-primary" href="{% url 'login' %}">{% trans "Log in" %}</a>
+        {% endif %}
+        </div>
+    <!--/div--><!--/.container-->
+    <hr/>
+    <footer class="footer">
+        {% block footer %}
+        <div class="container">
+            <p>2017 - {% now "Y" %} <a href="https://github.com/foxmask/orotangi">Orotangi</a></p>
+        </div>
+        {% endblock footer %}
+    </footer>
+</div>
+
+<script type="text/javascript" src="{% static 'js/js.cookie.js' %}"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<!-- Vue JS -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue.js"></script>
+<script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- Orotangi -->
+<script type="text/javascript" src="{% static 'js/orotangi.js' %}"></script>
+<!-- Material -->
+{% include 'material/includes/material_js.html' %}
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+    $(".button-collapse").sideNav();
+});
+//]]>
+</script>
+{% block extrajs %}{% endblock %}
+</body>
+</html>

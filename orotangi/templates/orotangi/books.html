@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% if user.is_authenticated %}{% trans "My Notes" %} - {{ user.username }} - {% else %}{% trans "Home" %} - {% endif %}Orotangi{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+
+<div class="col-sm-6">{# book #}
+    <form class="form-group form-horizontal" method="post">{% csrf_token %}
+        <label class="form-label" for="book">{% trans 'Book name' %}</label>
+        <input class="form-control" id="book" v-model="book" />
+
+        <button class="btn" v-on:click="addBook()">{% trans 'save' %}</button>
+    </form>
+
+    <p v-if="books.length == 0">{% trans 'No book yet' %}</p>
+    <div v-for="book in books" class="row">
+        <div class="col-sm-12">
+            <h3>[[ book.book ]]</h3>
+            <p> [[ book.id ]] - [[ book.date_created ]] - [[ book.date_modified ]]</p>
+            <button class="btn" v-on:click="delBook(book)"><span class="glyphicon glyphicon-trash"></span></button>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endblock %}

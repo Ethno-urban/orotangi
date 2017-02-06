@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% if user.is_authenticated %}{% trans "My Notes" %} - {{ user.username }} - {% else %}{% trans "Home" %} - {% endif %}Orotangi{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+
+<div class="col s1">{# book #}
+    <form class="form-group form-horizontal" method="post">{% csrf_token %}
+        <label class="form-label" for="book">{% trans 'Book name' %}</label>
+        <input class="form-control" id="book" v-model="book" />
+
+        <button class="btn" v-on:click="addBook()">{% trans 'save' %}</button>
+    </form>
+
+    <p v-if="books.length == 0">{% trans 'No book yet' %}</p>
+    <div v-for="book in books">
+        <ul>
+            <li>[[ book.book ]] <a href="#" v-on:click="delBook(book)">Delete</a>
+        </ul>
+    </div>
+</div>
+
+<div class="col s4">{# note #}
+    <p v-if="notes.length == 0">{% trans 'No note yet' %}</p>
+    <div v-for="note in notes" class="row">
+        <div class="col-sm-12">
+            <h3>[[ note.title ]]</h3>
+            <p>[[ note.content ]]</p>
+            <button class="btn" v-on:click="delNote(index)">Delete</button>
+            <button class="btn" v-on:click="editNote(index)">Edit</button>
+        </div>
+    </div>
+</div>
+
+<div class="col s4">
+    {# take the note #}
+    <form class="form-group form-horizontal" method="post">{% csrf_token %}
+        <label class="form-label" for="book">{% trans 'Book' %}</label>
+        <select v-model="note.books">
+        <!-- inline object literal -->
+            <option v-bind:value="[[ book.id ]]">[[ book.name ]]</option>
+        </select>
+        <label class="form-label" for="title">{% trans 'Title' %}</label>
+        <input type="text" id="title" v-model="note.title"/>
+
+        <label class="form-label" for="content">{% trans 'Content' %}</label>
+        <textarea class="form-control" id="content" v-model="note.content" rows="3"></textarea>
+
+        <textarea :value="input" @input="update"></textarea>
+        <div v-html="compiledMarkdown"></div>
+
+
+        <button class="btn" v-on:click="addNote()">{% trans 'save' %}</button>
+    </form>
+</div>
+
+
+{% endif %}
+{% endblock %}
