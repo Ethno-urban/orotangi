@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'orotangi',
     'rest_framework',
-#    'material',
+    'material',
     'corsheaders',
 ]
 
