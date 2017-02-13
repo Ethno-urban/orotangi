@@ -7,6 +7,7 @@ class Books(models.Model):
     """
         Book
     """
+    user = models.ForeignKey(User)
     book = models.CharField(max_length=80)
     date_created = models.DateField(auto_now_add=True)
     date_modified = models.DateField(auto_now=True)
@@ -23,6 +24,7 @@ class Tags(models.Model):
     """
         Tags
     """
+    user = models.ForeignKey(User)
     tag = models.CharField(max_length=80, blank=True)
     date_created = models.DateField(auto_now_add=True)
     date_modified = models.DateField(auto_now=True)
