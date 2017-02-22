@@ -7,65 +7,64 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{% trans "Home" %} - Orotangi{% endblock %}</title>
-    <!-- Latest compiled and minified CSS -->
+    <title>Orotangi</title>
+    <!-- for trigger happy render -->
     <meta name="author" content="FoxMaSk">
-    {% include 'material/includes/material_css.html' %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 </head>
 <body>
-<div id="app">
     {% block navbar %}
-    <nav class="cyan darken-1">
-        <div class="nav-wrapper">
-            <a  class="brand-logo" href="{% url 'home' %}" title="{% trans 'Home' %}">Orotangi</a>
-            {% if user.is_authenticated %}
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><li><a href="{% url 'logout' %}" title="{% trans 'Log out' %}">{% trans 'Log out' %}</a></li></li>
-            </ul>
-            {% endif %}
-        </div>
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item">
+          <a  class="brand-logo" href="{% url 'base' %}" title="{% trans 'Home' %}">Orotangi</a>
+        </a>
+      </div>
+      <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
+      <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
+      <span class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+      <!-- This "nav-menu" is hidden on mobile -->
+      <!-- Add the modifier "is-active" to display it on mobile -->
+      <div class="nav-right nav-menu">
+          {% if user.is_authenticated %}
+            <a class="nav-item" href="{% url 'logout' %}" title="{% trans 'Log out' %}">
+            <span class="icon">
+              <i class="fa fa-sign-out"></i>
+            </span>
+            </a>
+          {% endif %}
+      </div>
     </nav>
     {% endblock navbar %}
-    <!--div class="container"-->
-        <div class="row">
-        {% block content %}
-        {% endblock %}
-        {% if user.is_authenticated is False %}
-            <p>
-                <strong>Orotangi</strong> is up !
-            </p>
-            <p>Have Fun</p>
-            <a class="btn btn-primary" href="{% url 'login' %}">{% trans "Log in" %}</a>
-        {% endif %}
-        </div>
-    <!--/div--><!--/.container-->
+    {% block content %}
+    {% endblock %}
+    {% if user.is_authenticated %}
+    <div class="container is-fluid" id="root">
+        <app></app>
+    </div>
+    {% endif %}
     <hr/>
     <footer class="footer">
-        {% block footer %}
         <div class="container">
-            <p>2017 - {% now "Y" %} <a href="https://github.com/foxmask/orotangi">Orotangi</a></p>
+            <div class="content has-text-centered">
+            <p>
+                <strong>Orotangi</strong> by <a href="https://foxmask.trigger-happy.eu">FoxMaSk</a>.
+            </p>
+            <p>
+                <a class="icon" href="https://github.com/foxmask/orotangi">
+                    <i class="fa fa-github"></i>
+                </a>
+            </p>
+            </div>
         </div>
-        {% endblock footer %}
     </footer>
-</div>
 
-<script type="text/javascript" src="{% static 'js/js.cookie.js' %}"></script>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<!-- Vue JS -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue.js"></script>
-<script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<!-- Orotangi -->
-<script type="text/javascript" src="{% static 'js/orotangi.js' %}"></script>
-<!-- Material -->
-{% include 'material/includes/material_js.html' %}
-<script type="text/javascript">
-//<![CDATA[
-$(document).ready(function(){
-    $(".button-collapse").sideNav();
-});
-//]]>
-</script>
-{% block extrajs %}{% endblock %}
+    <script type="text/javascript" src="{% static 'build/orotangi_vue.js' %}"></script>
+    {% block extrajs %}{% endblock %}
 </body>
 </html>

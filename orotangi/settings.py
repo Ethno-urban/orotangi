@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'orotangi',
     'rest_framework',
-    'material',
     'corsheaders',
 ]
 
@@ -125,14 +124,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-        'rest_framework.permissions.DjangoModelPermissions'
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication'
-    )
+    #'DEFAULT_PERMISSION_CLASSES': (
+    #    'rest_framework.permissions.IsAuthenticated',
+    #    'rest_framework.permissions.DjangoModelPermissions'
+    #),
+    #'DEFAULT_AUTHENTICATION_CLASSES': (
+    #    'rest_framework.authentication.SessionAuthentication',
+    #    'rest_framework.authentication.BasicAuthentication'
+    #),
+
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -150,7 +150,11 @@ CORS_ALLOW_HEADERS = (
     'access-control-allow-origin ',
     'cookiename',
 )
+
 CORS_ORIGIN_WHITELIST = (
     'localhost:8001',
+    'localhost:8000',
     '127.0.0.1:8001',
+    '127.0.0.1:8000',
 )
+

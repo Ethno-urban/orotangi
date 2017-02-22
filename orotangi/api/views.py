@@ -1,7 +1,7 @@
-from rest_framework import viewsets
+from orotangi.api.serializers import NoteSerializer
+from orotangi.api.serializers import BookSerializer, TagSerializer
 from orotangi.models import Notes, Books, Tags
-from orotangi.api.serializers import NoteSerializer, BookSerializer, TagSerializer
-
+from rest_framework import viewsets
 
 class NoteViewSet(viewsets.ModelViewSet):
     """
@@ -10,7 +10,6 @@ class NoteViewSet(viewsets.ModelViewSet):
     """
     queryset = Notes.objects.all()
     serializer_class = NoteSerializer
-    permission_classes = []  # to remove after testing
 
 
 class BookViewSet(viewsets.ModelViewSet):
@@ -20,7 +19,6 @@ class BookViewSet(viewsets.ModelViewSet):
     """
     queryset = Books.objects.all()
     serializer_class = BookSerializer
-    permission_classes = []  # to remove after testing
 
 
 class TagViewSet(viewsets.ModelViewSet):
@@ -30,4 +28,3 @@ class TagViewSet(viewsets.ModelViewSet):
     """
     queryset = Tags.objects.all()
     serializer_class = TagSerializer
-    permission_classes = []  # to remove after testing

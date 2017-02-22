@@ -16,13 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from orotangi.views import base, home, logout_view
+from orotangi.views import base, logout_view
 
 urlpatterns = [
-    url(r'^$', home, name="home"),
-    # url(r'^$', base, name="base"),
+    url(r'^$', base, name="base"),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^logout$', logout_view, name="logout"),
     url(r'^admin/', admin.site.urls),
-    url(r'^api/orotangi/', include('orotangi.api.urls'))
+    url(r'^api/orotangi/', include('orotangi.api.urls')),
 ]
