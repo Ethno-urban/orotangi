@@ -16,29 +16,27 @@
 <body>
     {% block navbar %}
     <nav class="nav">
-      <div class="nav-left">
-        <a class="nav-item">
-          <a  class="brand-logo" href="{% url 'base' %}" title="{% trans 'Home' %}">Orotangi</a>
-        </a>
-      </div>
+        <div class="nav-left">
+          <a  class="nav-item brand-logo" href="{% url 'base' %}" title="{% trans 'Home' %}">Orotangi</a>
+        </div>
       <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
       <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
-      <span class="nav-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </span>
+        <span class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
       <!-- This "nav-menu" is hidden on mobile -->
       <!-- Add the modifier "is-active" to display it on mobile -->
-      <div class="nav-right nav-menu">
-          {% if user.is_authenticated %}
+        <div class="nav-right nav-menu">
+            {% if user.is_authenticated %}
             <a class="nav-item" href="{% url 'logout' %}" title="{% trans 'Log out' %}">
             <span class="icon">
               <i class="fa fa-sign-out"></i>
             </span>
             </a>
-          {% endif %}
-      </div>
+            {% endif %}
+        </div>
     </nav>
     {% endblock navbar %}
     {% block content %}
