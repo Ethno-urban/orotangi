@@ -1,7 +1,7 @@
 Orotangi
 ========
 
-Your thoughts everywhere 
+Your Thoughts, Everywhere 
 
 
 Installation

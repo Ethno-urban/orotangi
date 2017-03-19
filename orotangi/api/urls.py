@@ -1,12 +1,11 @@
 from django.conf.urls import url, include
 
-from orotangi.api.views import BookViewSet, NoteViewSet, TagViewSet
+from orotangi.api.views import BookViewSet, NoteViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'books', BookViewSet)
 router.register(r'notes', NoteViewSet)
-router.register(r'tags', TagViewSet)
 
 
 urlpatterns = [
