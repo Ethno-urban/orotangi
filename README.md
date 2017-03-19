@@ -21,6 +21,5 @@ cd orotangi
 Data Sample
 -----------
 
-* to add some tags go to http://localhost:8001/api/orotangi/tags/
 * to add some books go to http://localhost:8001/api/orotangi/books/
 
