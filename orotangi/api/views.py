@@ -2,6 +2,13 @@ from orotangi.api.serializers import NoteSerializer, BookSerializer
 from orotangi.models import Books, Notes
 
 from rest_framework import viewsets
+from rest_framework.pagination import PageNumberPagination
+
+
+class NoteResultsSetPagination(PageNumberPagination):
+    page_size = 20
+    # page_size_query_param = 'page_size'
+    max_page_size = 50
 
 
 class UserMixin(viewsets.GenericViewSet):
@@ -32,6 +39,7 @@ class NoteViewSet(UserMixin, viewsets.ModelViewSet):
     """
     queryset = Notes.objects.all()
     serializer_class = NoteSerializer
+    pagination_class = NoteResultsSetPagination
 
 
 class BookViewSet(UserMixin, viewsets.ModelViewSet):
