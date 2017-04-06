@@ -4,6 +4,18 @@ Orotangi
 Your Thoughts, Everywhere 
 
 
+Requirements
+------------
+
+The minimum are the following :
+
+* Python 3.6.x
+* [Django Rest Framework](http://www.django-rest-framework.org/) == 3.6.2
+* [Django](https://www.djangoproject.com/) 1.11
+* [django-cors-headers](https://pypi.python.org/pypi/django-cors-headers) == 2.0.2
+
+
+
 Installation
 ------------
 
@@ -15,7 +27,7 @@ pip install -r requirements.txt
 cd orotangi
 ./manage.py migrate
 ./manage.py createsuperuser
-./manage.py runserver localhost:8001 &
+./manage.py runserver localhost:8001
 ```
 
 Data Sample

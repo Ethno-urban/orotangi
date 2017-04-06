@@ -1,13 +1,13 @@
 from orotangi.api.serializers import NoteSerializer, BookSerializer
 from orotangi.models import Books, Notes
 
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 
 
 class NoteResultsSetPagination(PageNumberPagination):
     page_size = 20
-    # page_size_query_param = 'page_size'
     max_page_size = 50
 
 
@@ -40,6 +40,19 @@ class NoteViewSet(UserMixin, viewsets.ModelViewSet):
     queryset = Notes.objects.all()
     serializer_class = NoteSerializer
     pagination_class = NoteResultsSetPagination
+    # filter the note
+    filter_backends = (DjangoFilterBackend,)
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned notes to a given user,
+        by filtering against a `book` query parameter in the URL.
+        """
+        queryset = Notes.objects.all()
+        book = self.request.query_params.get('book', None)
+        if book is not None:
+            queryset = queryset.filter(book__name=book)
+        return queryset
 
 
 class BookViewSet(UserMixin, viewsets.ModelViewSet):
